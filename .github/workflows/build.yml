@@ -1,0 +1,23 @@
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gardenlinux/podman-run@main
+      - uses: gardenlinux/podman-run@main
+        with:
+          run: |
+            echo hello
+            ls -lah
+            x=abc
+            echo "$x"
+            ls -lah /mnt
+          mounts: ${{ github.workspace }}:/mnt
+      - uses: gardenlinux/podman-run@main
+        with:
+          run: uname -m
+      - uses: gardenlinux/podman-run@main
+        with:
+          arch: arm64
+          run: uname -m
